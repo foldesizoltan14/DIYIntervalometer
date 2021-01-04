@@ -73,7 +73,28 @@ if (digitalRead(buttonDown) == 0){
                         }
 
                       break; 
-             case 2 : Serial.println("Mode2");
+             case 2 : 
+                     if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 0){
+                        N++;
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 0){
+                        N--;
+                         delay(250);
+                        }
+                        if (digitalRead(buttonEnter) == 0){
+                        numOfEntersPressed++;
+                        delay(300);
+                        }
+
+                      if (numOfEntersPressed == 1){
+                        Mode2(N);
+                        numOfEntersPressed=0;
+                        N = 0;
+                        menuPosition=0;
+                        
+                        }
                       break;
              case 3 : Serial.println("Mode3");
                       menuPosition = 0;
@@ -102,6 +123,7 @@ void Mode2(int N ){
     for(int i = 0; i<=N;i++){
       //close relay
       //open relay
+       Serial.println(i);
       
       }
 }
