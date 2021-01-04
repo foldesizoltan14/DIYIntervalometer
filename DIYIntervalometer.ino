@@ -8,6 +8,17 @@ int menuPosition =     0;
 int shutterSpeed = 0;
 int N = 0;
 int numOfEntersPressed = 0;
+int dHour = 0;
+int dMinute = 0;
+int dSecond = 0; 
+int inHour = 0;
+int inMinute = 0;
+int inSecond = 0;
+
+const unsigned long SECOND = 1000;
+const unsigned long MINUTE = 60*SECOND;
+const unsigned long HOUR = 60*MINUTE;
+
 
  void setup() {
 
@@ -96,8 +107,104 @@ if (digitalRead(buttonDown) == 0){
                         
                         }
                       break;
-             case 3 : Serial.println("Mode3");
-                      menuPosition = 0;
+             case 3 :if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 0){
+                        dHour++;
+                        Serial.println("dHour");
+                        Serial.println(dHour);
+                        delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 0){
+                        dHour--;
+                        Serial.println("dHour");
+                        Serial.println(dHour);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 1){
+                       dMinute++;
+                       Serial.println("dMinute");
+                       Serial.println(dMinute);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 1){
+                        dMinute--;
+                        Serial.println("dMinute");
+                        Serial.println(dMinute);
+                         delay(250);
+                        }
+                         if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 2){
+                       dSecond++;
+                       Serial.println("dSecond");
+                       Serial.println(dSecond);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 2){
+                        dSecond--;
+                        Serial.println("dSecond");
+                        Serial.println(dSecond);
+                         delay(250);
+                        }
+                        if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 3){
+                        inHour++;
+                        Serial.println("inHour");
+                        Serial.println(inHour);
+                        delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 3){
+                        inHour--;
+                         Serial.println("inHour");
+                        Serial.println(inHour);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 4){
+                       inMinute++;
+                       Serial.println("inMinute");
+                       Serial.println(inMinute);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 4){
+                        inMinute--;
+                        Serial.println("inMinute");
+                        Serial.println(inMinute);
+                         delay(250);
+                        }
+                         if (digitalRead(buttonRight) == 0 and numOfEntersPressed == 5){
+                       inSecond++;
+                        Serial.println("inSecond");
+                       Serial.println(inSecond);
+                         delay(250);
+                        }
+
+                      if (digitalRead(buttonLeft) == 0 and numOfEntersPressed == 5){
+                        inSecond--;
+                        Serial.println("inSecond");
+                        Serial.println(inSecond);
+                         delay(250);
+                        }
+             
+                    if (digitalRead(buttonEnter) == 0){
+                        numOfEntersPressed++;
+                        delay(300);
+                        }
+             
+             if (numOfEntersPressed == 6){
+                        Mode3(dHour,dMinute,dSecond,inHour,inMinute,inSecond);
+                        numOfEntersPressed=0;
+                        N = 0;
+                        menuPosition=0;
+                        int dHour = 0;
+                        int dMinute = 0;
+                        int dSecond = 0; 
+                        int inHour = 0;
+                        int inMinute = 0;
+                        int inSecond = 0;
+                        }
                       break;
              default: menuPosition = 0;
                       break;         
@@ -130,7 +237,15 @@ void Mode2(int N ){
 
 
 
-void Mode3(int duration,int interval){
+void Mode3(int dHour,int dMinute, int dSecond, int inHour, int inMinute, int inSecond ){
+  uint32_t duration = (dHour*HOUR)+(dMinute*MINUTE)+(dSecond*SECOND);
+  uint32_t interval = (inHour*HOUR)+(inMinute*MINUTE)+(inSecond*SECOND);
+  for( uint32_t tStart = millis();  (millis()-tStart) < duration;  ){
+      
+      Serial.println("Pic taken");
+      delay(interval);
+    
+  }
   
   
   }      
