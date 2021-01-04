@@ -1,4 +1,4 @@
-# DIYIntervalometer
+# DIYIntervalometer // WORK IN PROGRESS//
 My DIY Intervalometer using an arduino nano and relay.
 In this repository you will find the arduino code,for a diy intervalometer,using a 2.5 mm jack cable. I created this for my Canon EOS 1200D,you have to check if your camera works
 the same,or not.
