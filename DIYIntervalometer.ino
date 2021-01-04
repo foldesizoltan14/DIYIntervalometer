@@ -130,7 +130,7 @@ void Mode2(int N ){
 
 
 
-void Mode2(int duration,int interval){
+void Mode3(int duration,int interval){
   
   
   }      
