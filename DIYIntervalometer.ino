@@ -14,6 +14,7 @@ int dSecond = 0;
 int inHour = 0;
 int inMinute = 0;
 int inSecond = 0;
+int numOfPictures = 0;
 
 const unsigned long SECOND = 1000;
 const unsigned long MINUTE = 60*SECOND;
@@ -40,9 +41,16 @@ if (digitalRead(buttonDown) == 0){
     }
 
   if (digitalRead(buttonUp) == 0){
+    if(menuPosition == 0){
+      menuPosition = 3;
+       Serial.println(menuPosition);
+      delay(250);
+      }
+    else {  
     menuPosition --;
     Serial.println(menuPosition);
     delay(250);
+    }
     }
 
     switch(menuPosition){
@@ -195,6 +203,11 @@ if (digitalRead(buttonDown) == 0){
              
              if (numOfEntersPressed == 6){
                         Mode3(dHour,dMinute,dSecond,inHour,inMinute,inSecond);
+                     Serial.println("Done,pictures taken : ");
+                    Serial.println(numOfPictures);
+                    numOfEntersPressed = 0;
+             }
+      if ( digitalRead(buttonBack) == 0){
                         numOfEntersPressed=0;
                         N = 0;
                         menuPosition=0;
@@ -204,6 +217,7 @@ if (digitalRead(buttonDown) == 0){
                         int inHour = 0;
                         int inMinute = 0;
                         int inSecond = 0;
+                numOfPictures = 0;
                         }
                       break;
              default: menuPosition = 0;
@@ -242,8 +256,12 @@ void Mode3(int dHour,int dMinute, int dSecond, int inHour, int inMinute, int inS
   uint32_t interval = (inHour*HOUR)+(inMinute*MINUTE)+(inSecond*SECOND);
   for( uint32_t tStart = millis();  (millis()-tStart) < duration;  ){
       
+    if ( digitalRead(buttonBack) == 0){
+        break;
+      }
       Serial.println("Pic taken");
       delay(interval);
+      numOfPictures++;
     
   }
   
